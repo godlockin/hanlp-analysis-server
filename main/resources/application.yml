@@ -3,13 +3,13 @@ server:
 
 spring:
   application:
-    name: hanlp-remote-service
+    name: hanlp-remote-server
   profiles:
     active: dev
 
 logging:
   config: classpath:logback-spring.xml
-  path: ./logs/shortUrl
+  path: ./logs/hanlp-remote-server
   pattern:
     dateformat: yyyyMMdd HH:mm:ss:SSS
     level: info
