@@ -1,0 +1,56 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: hanlp-remote-service
+  profiles:
+    active: dev
+
+logging:
+  config: classpath:logback-spring.xml
+  path: ./logs/shortUrl
+  pattern:
+    dateformat: yyyyMMdd HH:mm:ss:SSS
+    level: info
+
+hanlp:
+  enableIndex: true
+  enableNameRecognize: true
+  enablePlaceRecognize: true
+  enableCustomDictionary: true
+  enablePartOfSpeechTagging: true
+  enableOrganizationRecognize: true
+  enableNumberQuantifierRecognize: true
+  ignoreNature:
+    - c
+    - cc
+    - e
+    - o
+    - p
+    - pba
+    - pbei
+    - u
+    - ud
+    - ude1
+    - ude2
+    - ude3
+    - udeng
+    - uj
+    - ule
+    - w
+    - wb
+    - wd
+    - wf
+    - wh
+    - wj
+    - wky
+    - wkz
+    - wm
+    - wn
+    - wp
+    - ws
+    - wt
+    - ww
+    - wyy
+    - wyz
