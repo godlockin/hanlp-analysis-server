@@ -19,6 +19,7 @@
 		<java.version>1.8</java.version>
 		<hanlp.version>portable-1.7.5</hanlp.version>
 		<spring-cloud.version>Greenwich.RELEASE</spring-cloud.version>
+		<org.apache.maven.compiler.plugin.version>3.5.1</org.apache.maven.compiler.plugin.version>
 	</properties>
 
 	<dependencies>
@@ -87,33 +88,17 @@
 
 	</dependencies>
 
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-dependencies</artifactId>
-				<version>${spring-cloud.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
-
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${org.apache.maven.compiler.plugin.version}</version>
 				<configuration>
-					<mainClass>com.Application</mainClass>
+					<source>${maven.compiler.target}</source>
+					<target>${maven.compiler.target}</target>
+					<encoding>utf8</encoding>
 				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<goal>repackage</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 		</plugins>
 	</build>
