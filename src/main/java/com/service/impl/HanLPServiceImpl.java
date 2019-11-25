@@ -2,12 +2,9 @@ package com.service.impl;
 
 import com.common.LocalConfig;
 import com.common.constants.Constants.HanLPConfig;
-import com.common.constants.ResultEnum;
 import com.hankcs.hanlp.HanLP;
 import com.hankcs.hanlp.seg.Segment;
-import com.hankcs.hanlp.seg.common.Term;
 import com.model.BaseRequest;
-import com.model.BaseResponse;
 import com.model.Item;
 import com.service.HanLPService;
 import lombok.extern.slf4j.Slf4j;
@@ -29,22 +26,22 @@ public class HanLPServiceImpl implements HanLPService {
     private Set<String> ignoreNature;
 
     @Override
-    public BaseResponse doAnalysis(BaseRequest request) {
+    public List<String> doAnalysis(BaseRequest request) {
 
-        BaseResponse response = new BaseResponse();
         if (StringUtils.isBlank(request.getText())) {
             log.error("No text found");
-            return response.setResult(ResultEnum.PARAMETER_CHECK_EMPTY);
+            return new ArrayList<>();
         }
 
-        List<Item> items = doAnalysis(request.getText().trim());
-        return response.setItems(items);
+        List<String> items = doAnalysis(request.getText().trim());
+        log.debug("Generated {} items", items.size());
+        return items;
     }
 
-    private List<Item> doAnalysis(String text) {
+    private List<String> doAnalysis(String text) {
         return segment.seg(text).stream()
                 .filter(x -> ignoreNature.isEmpty() || !ignoreNature.contains(x.nature.toString()))
-                .map(Item::new).collect(Collectors.toList());
+                .map(term -> new Item(term).toString()).collect(Collectors.toList());
     }
 
     @PostConstruct

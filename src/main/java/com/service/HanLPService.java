@@ -1,8 +1,9 @@
 package com.service;
 
 import com.model.BaseRequest;
-import com.model.BaseResponse;
+
+import java.util.List;
 
 public interface HanLPService {
-    BaseResponse doAnalysis(BaseRequest request);
+    List<String> doAnalysis(BaseRequest request);
 }

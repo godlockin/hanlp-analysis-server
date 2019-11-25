@@ -16,4 +16,9 @@ public class Item {
         this.endIndex = term.offset + term.length();
         this.pos = term.nature.toString();
     }
+
+    @Override
+    public String toString() {
+        return this.text + "," + this.startIndex.toString() + "," + this.endIndex + "," + this.pos;
+    }
 }
