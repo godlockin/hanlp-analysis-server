@@ -1,6 +1,6 @@
 package com.service.langid;
 
-import org.springframework.util.ResourceUtils;
+import org.springframework.core.io.ClassPathResource;
 
 import java.io.*;
 import java.util.Arrays;
@@ -140,7 +140,7 @@ public final class Model {
       return defaultModel;
     }
 
-    try (FileInputStream is = new FileInputStream(ResourceUtils.getFile("classpath:langid.lzma"));
+    try (InputStream is = new ClassPathResource("langid.lzma").getInputStream();
          ByteArrayOutputStream os = new ByteArrayOutputStream()) {
 
       byte[] streamProperties = new byte[5];
