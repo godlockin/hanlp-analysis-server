@@ -9,7 +9,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Slf4j
@@ -18,6 +18,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class LogAspect {
 
     private ConcurrentHashMap<Long, Long> cache = new ConcurrentHashMap<>();
+    private List<String> ignoreSet = Arrays.asList("/");
 
     @Pointcut("execution(public * com.controller.*.*(..))")
     public void logic() {}
@@ -26,6 +27,10 @@ public class LogAspect {
     public void doBeforeLogic(JoinPoint joinPoint) {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
+
+        if (ignoreSet.contains(request.getRequestURI())) {
+            return;
+        }
 
         long threadId = Thread.currentThread().getId();
         long currTime = System.currentTimeMillis();
@@ -39,6 +44,10 @@ public class LogAspect {
     public void doAfterLogic(Object object) {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
+
+        if (ignoreSet.contains(request.getRequestURI())) {
+            return;
+        }
 
         long threadId = Thread.currentThread().getId();
         long currTime = System.currentTimeMillis();
