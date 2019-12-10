@@ -1,12 +1,12 @@
 package com.controller;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 public class HealthController {
 
-    @RequestMapping(value = "/_health")
+    @RequestMapping(value = "")
     public int healthCheck() {
         return 200;
     }
