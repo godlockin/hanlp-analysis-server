@@ -13,7 +13,7 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Slf4j
-@Aspect
+//@Aspect
 @Component
 public class LogAspect {
 
