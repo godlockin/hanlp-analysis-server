@@ -13,17 +13,17 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Slf4j
-//@Aspect
+@Aspect
 @Component
 public class LogAspect {
 
     private ConcurrentHashMap<Long, Long> cache = new ConcurrentHashMap<>();
     private List<String> ignoreSet = Arrays.asList("/");
 
-    @Pointcut("execution(public * com.controller.*.*(..))")
+//    @Pointcut("execution(public * com.controller.*.*(..))")
     public void logic() {}
 
-    @Before("logic()")
+//    @Before("logic()")
     public void doBeforeLogic(JoinPoint joinPoint) {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
@@ -40,7 +40,7 @@ public class LogAspect {
         cache.put(threadId, currTime);
     }
 
-    @AfterReturning(returning = "object", pointcut = "logic()")
+//    @AfterReturning(returning = "object", pointcut = "logic()")
     public void doAfterLogic(Object object) {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
